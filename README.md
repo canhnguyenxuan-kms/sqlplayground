@@ -1,0 +1,1 @@
+SQL playground that runs entirely in browser using DuckDB WASM.
