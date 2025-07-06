@@ -1,0 +1,18 @@
+{
+  "name": "sqlplayground",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@duckdb/duckdb-wasm": "^1.29.1-dev132.0",
+    "vite": "^6.3.5"
+  
+  }
+}

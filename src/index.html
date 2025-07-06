@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Interview Playground</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>SQL Interview Playground</h1>
+            <p>Practice SQL queries with DuckDB in your browser</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Status Bar -->
+            <div id="status" class="status"></div>
+
+            <!-- Sample Queries Section -->
+            <section class="sample-queries">
+                <h2>Sample Queries</h2>
+                <div class="query-buttons">
+                    <button class="sample-query btn-sample" data-query="SELECT * FROM employees ORDER BY name;">
+                        All Employees
+                    </button>
+                    <button class="sample-query btn-sample" data-query="SELECT name, salary FROM employees WHERE salary > 80000 ORDER BY salary DESC;">
+                        High Earners
+                    </button>
+                    <button class="sample-query btn-sample" data-query="SELECT d.name, COUNT(e.id) as employee_count, AVG(e.salary) as avg_salary FROM departments d LEFT JOIN employees e ON d.name = e.department GROUP BY d.name;">
+                        Department Summary
+                    </button>
+                    <button class="sample-query btn-sample" data-query="SELECT e.name as employee, m.name as manager FROM employees e LEFT JOIN employees m ON e.manager_id = m.id;">
+                        Employees with Managers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Schema Reference -->
+            <section class="schema-section">
+                <h2>Database Schema</h2>
+                <div class="schema-tables">
+                    <div class="table-schema">
+                        <h3>employees</h3>
+                        <ul>
+                            <li><strong>id</strong> - INTEGER (Primary Key)</li>
+                            <li><strong>name</strong> - VARCHAR(100)</li>
+                            <li><strong>department</strong> - VARCHAR(50)</li>
+                            <li><strong>salary</strong> - INTEGER</li>
+                            <li><strong>hire_date</strong> - DATE</li>
+                            <li><strong>manager_id</strong> - INTEGER (Foreign Key)</li>
+                        </ul>
+                    </div>
+                    <div class="table-schema">
+                        <h3>departments</h3>
+                        <ul>
+                            <li><strong>id</strong> - INTEGER (Primary Key)</li>
+                            <li><strong>name</strong> - VARCHAR(50)</li>
+                            <li><strong>budget</strong> - INTEGER</li>
+                        </ul>
+                    </div>
+                    <div class="table-schema">
+                        <h3>projects</h3>
+                        <ul>
+                            <li><strong>id</strong> - INTEGER (Primary Key)</li>
+                            <li><strong>name</strong> - VARCHAR(100)</li>
+                            <li><strong>department_id</strong> - INTEGER (Foreign Key)</li>
+                            <li><strong>start_date</strong> - DATE</li>
+                            <li><strong>end_date</strong> - DATE</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SQL Query Editor -->
+            <section class="query-section">
+                <h2>SQL Query Editor</h2>
+                <div class="query-editor">
+                    <textarea 
+                        id="sql-input" 
+                        placeholder="Enter your SQL query here... (Press Ctrl+Enter to execute)"
+                        rows="8"
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="editor-controls">
+                        <button id="execute-btn" class="btn btn-primary">
+                            Execute Query
+                        </button>
+                        <button id="clear-btn" class="btn btn-secondary">
+                            Clear Results
+                        </button>
+                        <span class="keyboard-hint">Tip: Press Ctrl+Enter to execute</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div id="results-container" class="results-container" style="display: none;">
+                    <div class="results-header">
+                        <h2>Query Results</h2>
+                        <span id="execution-time" class="execution-time"></span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="results-table">
+                            <tbody id="results-table">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
